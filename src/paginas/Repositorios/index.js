@@ -10,7 +10,7 @@ export default function Repositorios({ route, navigation }) {
     const estaNaTela = useIsFocused();
 
     useEffect(async () => {
-        const resultado = await pegarRepositorioDoUsuario(route.params.id)
+        const resultado = await pegarRepositorioDoUsuario(route.params.login)
         setRepo(resultado)
     },[estaNaTela]);
 
@@ -18,8 +18,8 @@ export default function Repositorios({ route, navigation }) {
         let resultado;
 
         if (filtroRepo.length > 0) {
-            resultado = await pegarRepositorioEspecifico(filtroRepo);
-
+            resultado = await pegarRepositorioEspecifico(route.params.login, filtroRepo);
+            
             if (resultado.length > 0){
                 setRepo(resultado);
             }
@@ -28,7 +28,7 @@ export default function Repositorios({ route, navigation }) {
             }
 
         } else {
-            resultado = await pegarRepositorioDoUsuario(route.params.id)
+            resultado = await pegarRepositorioDoUsuario(route.params.login)
             setRepo(resultado)
         }
         
